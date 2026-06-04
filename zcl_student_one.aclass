@@ -1,0 +1,43 @@
+CLASS zcl_student_one DEFINITION
+  PUBLIC
+  FINAL
+  CREATE PUBLIC .
+
+  PUBLIC SECTION.
+  INTERFACES if_oo_adt_classrun.
+  PROTECTED SECTION.
+  PRIVATE SECTION.
+ENDCLASS.
+
+
+
+CLASS zcl_student_one IMPLEMENTATION.
+
+METHOD if_oo_adt_classrun~main.
+
+  DATA(lo_cricket) = NEW lcl_cricket(
+    i_player      = 'Sachin Tendulkar'
+    i_player_runs = 18426
+  ).
+
+  out->write( lo_cricket->get_player( ) ).
+
+  DATA(lo_foot) = NEW lcl_foot(
+    i_player      = 'Virat Kohli'
+    i_player_runs_1 = 12000
+    i_century     = 80
+  ).
+
+  out->write( lo_foot->get_player( ) ).
+
+  DATA(lo_basket) = NEW lcl_bassket(
+    i_player      = 'Rohit Sharma'
+    i_player_runs_1 = 10000
+    i_fifty       = 55
+  ).
+
+  out->write( lo_basket->get_player( ) ).
+
+
+ENDMETHOD.
+ENDCLASS.

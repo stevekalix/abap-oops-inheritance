@@ -1,0 +1,110 @@
+*"* use this source file for the definition and implementation of
+*"* local helper classes, interface definitions and type
+*"* declarations
+class lcl_cricket definition
+create public.
+  public section.
+    METHODS:
+     constructor
+      IMPORTING
+        i_player TYPE string
+        i_player_runs TYPE i,
+
+
+   get_player
+      RETURNING
+        VALUE(r_player) TYPE string.
+
+
+
+  protected section.
+  DATA:
+      PLAYER TYPE STRING,
+      PLAYER_RUNS TYPE I.
+  private section.
+endclass.
+
+class lcl_cricket implementation.
+
+  method constructor.
+    me->player = i_player.
+    me->player_runs = i_player_runs.
+  endmethod.
+
+  method get_player.
+    r_player =  |PLAYER :{ PLAYER } , PLAYER_RUNS :{ player_runs } |.
+  endmethod.
+
+endclass.
+
+
+
+ class lcl_foot definition INHERITING FROM lcl_cricket.
+
+   public section.
+     METHODS:
+      constructor
+       IMPORTING
+         i_player TYPE string
+         i_player_runs_1 TYPE i
+         i_century TYPE i ,
+
+        get_player REDEFINITION.
+
+   private section.
+    DATA CENTURY TYPE I.
+
+ endclass.
+
+ class lcl_foot implementation.
+
+  method constructor.
+    super->constructor(
+     i_player = i_player i_player_runs = i_player_runs_1
+     ).
+    me->century = i_century.
+
+  endmethod.
+
+   method get_player.
+       r_player = |PLAYER :{ PLAYER } , PLAYER_RUNS :{ player_runs } , CENTURY : { century } |.
+  endmethod.
+
+endclass.
+
+
+
+class lcl_bassket definition INHERITING FROM lcl_cricket.
+
+  public section.
+    METHODS:
+     constructor
+      IMPORTING
+        i_player TYPE string
+        i_player_runs_1 TYPE i
+        i_fifty TYPE i,
+
+     get_player REDEFINITION.
+
+  private section.
+
+  DATA : FIFTY TYPE I.
+
+endclass.
+
+class lcl_bassket implementation.
+
+  method constructor.
+    super->constructor( i_player = i_player i_player_runs = i_player_runs_1 ).
+    me->fifty = i_fifty.
+    me->player = i_player.
+    me->player_runs = i_player_runs_1.
+  endmethod.
+
+  method get_player.
+      r_player = |PLAYER :{ PLAYER } , PLAYER_RUNS :{ player_runs } , FIFTY : { fifty } |.
+  endmethod.
+
+endclass.
+
+
